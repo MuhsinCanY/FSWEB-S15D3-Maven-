@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.entity.Employee;
+
 import java.util.*;
 
 public class Main {
@@ -23,10 +24,10 @@ public class Main {
         List<Employee> unique = new ArrayList<>();
         List<Employee> duplicates = new ArrayList<>();
 
-        for (Object employee: list){
-            if(unique.contains(employee)){
+        for (Object employee : list) {
+            if (unique.contains(employee)) {
                 duplicates.add((Employee) employee);
-            }else{
+            } else {
                 unique.add((Employee) employee);
             }
         }
@@ -38,8 +39,8 @@ public class Main {
         Map<Integer, Employee> uniques = new HashMap<>();
         List<Employee> uniquesList = new ArrayList<>();
 
-        for (Object employee: list){
-            if(!uniquesList.contains(employee) && employee != null){
+        for (Object employee : list) {
+            if (!uniquesList.contains(employee) && employee != null) {
                 uniquesList.add((Employee) employee);
                 uniques.put(((Employee) employee).getId(), (Employee) employee);
             }
@@ -48,21 +49,26 @@ public class Main {
         return uniques;
     }
 
-    public static List<Employee> removeDuplicates(List list) {
-        List<Employee> removedList = new ArrayList<>();
-        List<Employee> uniquesList = new ArrayList<>();
-        List<Employee> duplicates = new ArrayList<>();
+    public static List<Employee> removeDuplicates(List employees) {
+//        List<Employee> removedList = new ArrayList<>();
+//        List<Employee> uniquesList = new ArrayList<>();
+//        List<Employee> duplicates = findDuplicates(employees);
+//
+//        for (Object employee: employees){
+//            if(!uniquesList.contains(employee) && employee != null){
+//                uniquesList.add((Employee) employee);
+//            }
+//        }
+//
+//        removedList = uniquesList;
+//        removedList.removeAll(duplicates);
+//        return removedList;
+//        (List<Employee>) findUniques(list).values();
 
-        for (Object employee: list){
-            if(uniquesList.contains(employee)){
-                duplicates.add((Employee) employee);
-            }else{
-                uniquesList.add((Employee) employee);
-            }
-        }
-
-        removedList = uniquesList;
-        removedList.removeAll(duplicates);
-        return removedList;
+        List<Employee> duplicates = findDuplicates(employees);
+        Map<Integer, Employee> uniques = findUniques(employees);
+        List<Employee> onlyUnique = new LinkedList<>(uniques.values());
+        onlyUnique.removeAll(duplicates);
+        return onlyUnique;
     }
 }
